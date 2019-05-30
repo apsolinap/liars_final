@@ -1,0 +1,1115 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<link rel="icon" type="image/png" href="assets/img/favicon.ico">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<title>LIARS</title>
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+
+    <!-- Bootstrap core CSS     -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Animation library for notifications   -->
+    <link href="assets/css/animate.min.css" rel="stylesheet"/>
+    
+    <link href="request.css" rel="stylesheet"/>
+
+
+    <!--  Light Bootstrap Table core CSS    -->
+    <link href="assets/css/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet"/>
+
+
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+    
+        <script>
+          // Initialize Firebase
+          var config = {
+            apiKey: "AIzaSyCwVEO8cihNflgJ3j_I4C53x1vy9qIOMHs",
+            authDomain: "liars-secial-prob.firebaseapp.com",
+            databaseURL: "https://liars-secial-prob.firebaseio.com",
+            projectId: "liars-secial-prob",
+            storageBucket: "liars-secial-prob.appspot.com",
+            messagingSenderId: "609938220292"
+          };
+          firebase.initializeApp(config);
+        </script>
+</head>
+<body>
+
+<div class="wrapper">
+    <div id="lab-color" class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
+    	<div class="sidebar-wrapper" id="sidebar-actions">
+            <div class="logo">
+                <a href="#" class="simple-text">
+                    LIARS
+                </a>
+            </div>
+
+            
+    	</div>
+    </div>
+
+    <div class="main-panel">
+        <nav class="navbar navbar-default navbar-fixed">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Dashboard</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                           <a href="#">
+                               <div id="logged_user_name" ></div>
+                            </a>
+                        </li>
+                        <li>
+                            <a id="logoutBtn" onclick="" href="#">
+                                
+                            </a>
+                        </li>
+						<li class="separator hidden-lg"></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+            <div id="loader">
+                <center>
+                    <img style="width:20%" src="C:\Users\user\Desktop\farts\liars-2.gif">
+                </center>
+            </div>
+            
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="login_cont" class="login col-md-12 container border rounded" style="display:none">
+                          <h2 >Login</h2>
+                            <label id="errormsg" style="color:red"></label>
+                            <form class="form-group" id="login-form">
+                              <label for="username">Email:</label>
+                              <input type="username" class="form-control" style="width:600px" id="username" placeholder="Enter username" name="username">
+                              <label>Password:</label>
+                              <input type="password" class="form-control" style="width:600px" id="pwd" placeholder="Enter password">
+                            </form>
+                            
+                            <button class="btn-primary btn" onclick="login()">Submit</button>
+                        </div>
+                        <div id="logged_in_content">
+                        <div class="card container border rounded col-md-12" id="equip_div" style="display:none">
+                                <div id="equip-header" class="input-group header">
+                                    <div class="input-group-btn ">
+                                        <div class="col-md-4 search-class">
+                                            <button type="button" class="btn btn-block btn-default dropdown-toggle" data-toggle="dropdown">
+                                                <span id="search_class">Class</span> <span class="caret"></span>
+                                            </button>
+                                            <div id="dropdownClass" class="col-md-4">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 search-semester">
+                                            <button type="button" class=" btn btn-block btn-default dropdown-toggle" data-toggle="dropdown">
+                                                <span id="search_semester">Semester</span> <span class="caret"></span>
+                                            </button>
+                                            <div id="dropdownSem" class="col-md-4">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 search-active-archive">
+                                            <button type="button" class="btn btn-block btn-default dropdown-toggle" data-toggle="dropdown">
+                                                <span id="search_active_archive">Active</span> <span class="caret"></span>
+                                            </button>
+                                            <div id="active_archived_filter" class="col-md-4" >
+                                                <ul class="dropdown-menu" role="menu">
+                                                  <li><a href="#active_classes">Active</a></li>
+                                                  <li><a href="#archived_classes">Archived</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="search_inventory" value="all" >
+                                    </div>
+                              
+                                </div>
+                            
+                            <div id="createGroup_div">
+                                <br>
+                                <div id="loader_equip">
+                                    <center>
+                                        <img style="width:20%" src="C:\Users\user\Desktop\farts\liars-2.gif">
+                                    </center>
+                                </div>
+                                <div id="group_results" class="table-responsive table-full-width">
+                                    <!--result for history search here-->
+                                  
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--history div-->
+                        <div class="card history_div container border rounded col-md-12" id="history_div" style="display:none">
+                            <div class="input-group">
+                                <div class="input-group-btn search-panel">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        <span id="search_concept">Request</span> <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                      <li><a href="#request_filter">Request</a></li>
+                                      <li><a href="#item_filter">Item</a></li>
+                                      <li><a href="#date_request_filter">Date Request</a></li>
+                                      <li><a href="#date_item_filter">Date Item</a></li>
+                                    </ul>
+                                </div>
+                                <input type="hidden" name="search_history" value="all" >         
+                                <input type="text" class="form-control" name="x" id="search_history" value="" placeholder="Search term...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"><i class="pe-7s-search"></i></button>
+                                </span>
+                            </div>
+                            <div id="datepicker_div" style="display:none">
+                                <label for="start">Start</label>
+                                <input type="date" class="form-control" id="start" name="req-start" value="" min="2015-01-01">
+                                <label for="end">End</label>
+                                <input type="date" class="form-control" id="end" name="req-end" value="" >
+                            </div>
+                            <div id="history_result">
+                                <br>
+                                Sorry, nothing here.
+                            </div>
+                            <div id="history_pagination">
+                               
+                            </div>
+                        </div>
+                        <!--accountability-->
+                        <div class="card history_div container border rounded col-md-12" id="accountability_div" style="display:none">
+                            <div class="input-group">       
+                                <input type="text" class="form-control" name="x" id="search_accountability" value="" placeholder="Search user...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"><i class="pe-7s-search"></i></button>
+                                </span>
+                            </div>
+
+                            <div id="accountability_result">
+                                <br>
+                               
+                                   Sorry, nothing here.
+                                
+                            </div>
+                        </div>
+
+
+                        <!--inventory-->
+                        <div id="inventory_div" class="inventory_div card" style="display:none">
+                            <div class="header">
+                                <div id="inventory-header" class="header">
+                                <div class="btn-left-holder">
+                                    <button class="info-btn btn-left btn add-item-btn" id="add-item-btn"  data-toggle="modal">Add item</button>
+                                    <button class="info-btn btn btn-left view-in-list-btn" id="view-in-list">View in List</button>
+                                </div>
+                                    <div class="input-group">
+                                        <div class="input-group-btn search-category">
+                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                <span id="search_category">Category Filter</span> <span class="caret"></span>
+                                            </button>
+                                            <div id="inventory_category_filter">
+                                            </div>
+                                        </div>
+                                        <div class="input-group-btn search-name">
+                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                <span id="search_name">Name Filter</span> <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                              <li><a href="#A-Z">A-Z</a></li>
+                                              <li><a href="#Z-A">Z-A</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="input-group-btn search-stock">
+                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                <span id="search_stock">Stock Filter</span> <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                              <li><a href="#ascending_filter">Ascending Quantity</a></li>
+                                              <li><a href="#descending_filter">Descending Quantity</a></li>
+                                            </ul>
+                                        </div>
+                                        <input type="hidden" name="search_inventory" value="all" >         
+                                        <input type="text" class="form-control" name="x" id="searchQueryInventory" value="" placeholder="Search item...">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button"><i class="pe-7s-search"></i></button>
+                                        </span>
+                                    </div>
+                              
+                                   </div>
+                            </div>
+                            <div class="content inventory_content">
+                                <div class="itemsandloader-div">
+                                    <div id="items-loader" style="display:none">
+                                        <center>
+                                            <img style="width:20%" src="C:\Users\user\Desktop\farts\liars-2.gif">
+                                        </center>
+                                    </div>
+                                    <div class="items-div-pcd" id="items-div">
+                                        <h3>Select category first.</h3>
+
+                                    </div>
+                                </div>
+                            </div>
+                            
+                          </div>
+                          
+                        <!--end of inventory-->
+                           
+                        <!--request_div-->
+                        <div class="card request_div" id="request_div" style="display:none">
+                            <div class="header">
+                                 <div id="request_header" class="header" >
+                                    <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
+                                      <li class="nav-item active">
+                                        <a class="nav-link active" id="pending_tab" onclick="open_pending_tab()" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-home" aria-selected="true">Pending<span id="pending_notif" class="badge badge-info"></span></a>
+                                      </li>
+                                      <li class="nav-item">
+                                        <a class="nav-link" id="processing_tab" data-toggle="pill" onclick="open_processing_tab()" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Processing</a>
+                                      </li>
+                                      <li class="nav-item">
+                                        <a class="nav-link" id="declined_tab" data-toggle="pill" 
+                                        onclick="open_declined_tab()" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Declined</a>
+                                      </li>
+                                      <li class="nav-item">
+                                        <a class="nav-link" id="completed_tab" onclick="open_completed_tab()"
+                                        data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Completed</a>
+                                      </li>
+                                    <li class="nav-item pull-right">
+                                        <a class="nav-link" class="btn btn-info" id="archive_tab" data-toggle="pill" onclick="open_archive_tab()" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Archive</a>
+                                      </li>               
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="content">
+
+                            <!--pending-->
+                            <div id="pending_div" class="request-content" style="display:none" >
+                                <div class="items-div-pcd " id="pending-items-div-pcd">
+                                </div>
+                            </div>
+                            <!--archive-->
+                            <div id="archive_div" class="request-content white" style="display:none" >
+                                <div class="items-div-pcd " id="archive-items-div-pcd">
+                                </div>
+                            </div>
+                            <!--processing-->
+                           
+                               <div id="request_status" class="form-check form-check-radio" style="display:none">
+                                            <div class="custom-radios">
+                                              <div>
+                                                <input type="radio" id="color-1" name="request_status" value="others" checked>
+                                                <label for="color-1"> 
+                                                  <span>
+                                                  </span>
+                                                </label>
+                                                All
+                                              </div>
+                                              
+                                              <div>
+                                                <input type="radio" id="color-2" name="request_status" value="preparing">
+                                                <label for="color-2"> 
+                                                  <span>
+                                                  </span>
+                                                </label>
+                                                Preparing
+                                              </div>
+                                              
+                                              <div>
+                                                <input type="radio" id="color-3" name="request_status" value="ready">
+                                                <label for="color-3"> 
+                                                  <span>
+                                                  </span>
+                                                </label>
+                                                Ready
+                                              </div>
+
+                                              <div>
+                                                <input type="radio" id="color-4" name="request_status" value="released">
+                                                <label for="color-4"> 
+                                                  <span>
+                                                  </span>
+                                                </label>
+                                                Released
+                                              </div>
+
+                                              <div>
+                                                <input type="radio" id="color-5" name="request_status" value="defective">
+                                                <label for="color-5"> 
+                                                  <span>
+                                                  </span>
+                                                </label>
+                                                Defective
+                                              </div>
+                                            </div>
+
+                                            </div>
+                                 <div id="processing_div" class="request-content" style="display:none">
+                                <div class="items-div-pcd row align-items-center process-content" id="processing-items-div-pcd">
+                                    
+                                </div>
+                            </div>
+                        
+
+                            
+
+                            <!--declined tab-->
+                            <div id="declined_div" class="request-content" style="display:none">
+                                <div class="items-div-pcd" id="declined-items-div-pcd"></div>
+                            </div>
+
+                            <!--completed tab-->
+                            <div id="completed_div" class="request-content" style="display:none">
+                                <div class="items-div-pcd" id="completed-items-div-pcd"></div>
+                            </div>
+                            <center>
+                                <h3><div style="width:100%;height:50px;" id="loadingCards">Scroll down to load more requests.</div></h3>
+                            </center>
+                         </div>
+                        <!--end of request-->    
+
+                    </div>
+                    <!--col-md-12 end-->
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>  
+            <!-- Open User Settings -->
+                <div id="user-settings"  class="modal fade" role="dialog">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">User Settings</h4>
+                      </div>
+
+                      <div id="changePass" class="modal-body form-group">
+                        <label id="success-change" class="success"></label>
+                        <label id="doesMatch" class="error"></label>
+                        <div class="form-group">
+                          <label id="error-new-pass1" for="new-pass">New Password</label>
+                          <input type="password" class="form-control" id="new-password1">
+                        </div>
+
+                        <div class="form-group">
+                          <label id="error-new-pass2" for="old-pass">Retype New Password</label>
+                          <input type="password" class="form-control" id="new-password2">
+                        </div>
+                        <div class="form-group">
+                          <label id="error-old-pass" for="old-pass">Old Password</label>
+                          <input type="password" class="form-control" id="change-pass-old">
+                        </div>
+                        <label id="successfulChange" class="text-success"></label>
+                      </div>
+                      <div class="modal-footer">
+                        <button class="btn modal-add-btn btn-primary" onclick="verify()" id="submit-settings"> Submit Changes</button>
+                        <button type="button" class="btn modal-cancel-btn" id="cancel-btn" data-dismiss="modal">Cancel</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+
+
+              <!-- Add Item Modal -->
+                <div id="add-item-modal" class="modal fade" role="dialog">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Add Item</h4>
+                      </div>
+
+                      <div class="modal-body form-group">
+                        <div class="form-group col-md-8">
+                          <label id="error-name" for="update-name">Item Name</label>
+                          <input type="text" name="item-name" class="form-control input-name" id="item-name">
+                        </div>
+
+                        <div class="form-group col-md-8">
+                          <label id="error-cat" for="inlineFormCustomSelect">Category</label>
+                            <div class="modal-category">
+                              <div id="add-item-categories-div" class="add-item-categories-div "></div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="chem-quan form-row" >
+                                <div class="form-group col-md-8">
+                                    <label id="error-amount" for="amount">Amount</label>
+                                    <input type="number" class="form-control input-amount" min="0" id="item-amount">
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label id="error-unit" for="unit">Unit</label>
+                                    <div id="add-item-unit-div"></div>
+                                </div>
+                            </div>
+                            <div class="appa-quan">
+                                <div class="form-group col-md-8">
+                                    <label id="error-quantity" for="quantity">Quantity</label>
+                                    <input type="number" class="form-control input-quantity" min="1" id="item-quantity">
+                                </div>
+                            </div>
+                        </div>
+
+                      </div>
+                      <div class="modal-footer">
+                        <button class="btn modal-add-btn" id="modal-add-btn"> Add Item</button>
+                        <button type="button" class="btn modal-cancel-btn" id="modal-cancel-btn" data-dismiss="modal">Cancel</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <!-- Item Summary Modal -->
+                <div id="item-summary-modal" class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">Item Summary</h3>
+                      </div>
+                      <div class="modal-body">
+                        <span id="sum-name"></span><br>
+                        <span id="sum-cat"></span><br>
+                        <span id="sum-quan"></span>
+                        <span id="sum-amount"></span>
+                        <span id="sum-unit"></span>
+
+                      
+                      </div>
+                      <div class="modal-footer">
+                        <button class="btn modal-add-btn btn-info" id="modal-confirm-summary-btn"> Confirm </button>
+                        <button class="btn modal-cancel-btn" data-dismiss="modal" id="modal-edit-summary-btn">Close</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="modal fade" id="update-item-modal" tabindex="-1" role="dialog" aria-labelledby="update-item-modal" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Update Item</h5>
+                            </div>
+                      
+                        <div class="modal-body form-group">
+                            <div class="form-group col-md-8" id="update-name-div">
+                                <label id="update-error-name" for="update-name">Item Name</label>
+                                <input type="text" name="update-name" class="form-control input-name" id="update-name">
+                            </div>
+                            <div class="form-group col-md-8">
+                              <label id="update-error-cat" for="inlineFormCustomSelect">Category</label>
+                                <div class="modal-category">
+                                    <div id="update-item-categories-div" class="add-item-categories-div "></div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="chem-quan form-row">
+                                    <div class="form-group col-md-8">
+                                      <label id="update-error-amount" for="update-amount">Amount</label>
+                                      <input type="number" class="form-control input-amount" min="0" id="update-amount">
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                      <label id="update-error-unit" for="update-unit">Unit</label>
+                                      <div id="update-item-unit-div"></div>
+                                    </div>
+                                </div>
+                                <div class="appa-quan">
+                                    <div class="form-group col-md-8">
+                                        <label id="update-error-quantity" for="update-quantity">Quantity</label>
+                                        <input type="number" class="form-control input-quantity" min="1" id="update-quantity">
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+
+                        <div class="modal-footer">
+                            <button class="btn modal-add-btn" id="modal-update-btn" > Update Item</button>
+                            <button type="button" class="btn modal-cancel-btn" id="update-modal-cancel-btn" data-dismiss="modal">Cancel</button>
+                      </div>
+                        </div>
+                    </div>
+                </div>
+               
+
+
+            <!--Confirmation Modal-->
+                <div class="modal" id="confirmModal" role="dialog">
+                    <div class="modal-dialog">
+                    
+                        <!-- Decline Modal Content -->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="confirm-text-title"><i class="fa fa-question-circle" aria-hidden="true"></i></h4>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <span id="confirm-text">Are you sure?</label>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal" id="cancelConfirm">Cancel</button>
+                                <button type="button" class="btn btn-primary" id="confirmStatusChange" onclick="" name="" data-dismiss="modal">Confirm</button>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div>
+
+                
+
+                <!--View History Modal-->
+                <div class="modal fade" id="viewHistoryModal" tabindex="-1" role="dialog" aria-labelledby="viewHistoryModalTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="viewHistoryModalTitle">History of Request</h5>
+                            </div>
+                            <div class="modal-body">
+                                <span id="history-table-modal" class="history-table" ></span>
+                            </div>
+                            <div id="viewHistoryFooter" class="modal-footer">
+                                <button type="button" id="cancelHistoryView" class="btn btn card-btn" data-toggle="modal" data-dismiss="modal"> Close </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--See More of Request Modal-->
+                <div class="modal fade" id="seeMore" tabindex="-1" role="dialog" aria-labelledby="seeMoreRequestModalTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="seeMoreRequestModalTitle">Request Details</h5>
+                        
+                      </div>
+
+                      <div class="modal-body">
+                        <span id="modal-status" class="status">Status</span> <br>
+                        <span id="modal-request-number" class="request-number">Request Number:</span><br>
+                        <span id="modal-request-sent" class="request-sent">Request Sent:</span><br>
+                        <span id="modal-request-needed" class="request-needed">Request Needed:</span><br>
+                        <span id="modal-userid" class="request-requestor">Requestor Name:</span><br>
+                        <span id="modal-description" class="request-description"></span><br>
+                        <span id="modal-items" class="request-items"><div class='header'><h5 class='title'>Item Summary</h5><p class='catergory'>Below are the summary of items.</p></div></span>
+                      </div>
+
+                      <div class="modal-footer">
+                        <button id="view-history-modal-btn" data-dismiss="modal" onclick="getHistory(this,'request')" class="btn btn card-btn"> View History </button>
+                        <button class="btn btn card-btn" data-dismiss="modal"> Close </button>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                
+                <!--See More of Request Modal but for Processing-->
+                <div class="modal fade" id="moreProcessing" tabindex="-1" role="dialog" aria-labelledby="seeMoreRequestModalProcessingTitle" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="seeMoreRequestModalProcessingTitle">Request Number</h5>
+                        
+                      </div>
+                      <div class="modal-body">
+                        <span class="status">Status</span><br>
+                        <span class="request-number">Request Number:</span><br>
+                        <span class="request-sent">Request Sent:</span><br>
+                        <span class="request-needed">Request Needed:</span><br>
+                        <span class="request-requestor">Requestor Name:</span><br>
+                        <span class="request-items">Items:</span><br>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-info btn card-btn" data-toggle="modal" data-target="declineModal"> Decline </button>
+                        <button class="btn btn card-btn" onclick="update_status(this)" data-toggle="modal" data-target="updateModal" data-dismiss="modal"> Update </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Update Modal -->
+                <div class="modal fade" id="updateModal" role="dialog">
+                    <div class="modal-dialog">
+                    
+                        <!-- Decline Modal Content -->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Update Request</h4>
+                            </div>
+                            <div class="modal-body">
+                                <span id="statusSpan"><h4>Status</h4></span>
+                                
+                                <select onclick="update_status(this)" class="form-control" id="statusUpdate">
+                                  <option value="preparing">Preparing</option>
+                                  <option value="ready">Ready</option>
+                                  <option value="released">Released</option>
+                                  <option value="defective">Defective</option>
+                                  <option value="completed">Completed</option>
+                                  <option value="declined">Declined</option>
+                                </select>
+                                
+                                <br>
+                                <div id="updateModalContent">
+                                    <div id="releasedContent">
+                                    <input id="releaseConfirmUpdate" value="true" hidden>
+                                    <input type="text" id="releasedTo" hidden>
+                                        <div class="form-check">
+                                          <label class="form-check-label" for="radio1">
+                                            <input type="radio" onclick="notOther('requestor')" class="form-check-input" id="radio1" name="optradio" value="option1" checked>Requestor
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <label class="form-check-label" for="radio2">
+                                            <input type="radio" onclick="notOther('authorized')" class="form-check-input" id="radio2" name="optradio" value="option2">Authorized by Requestor
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <label class="form-check-label" for="radio3">
+                                            <input type="radio" class="form-check-input" id="radio3" onclick="releasedOtherCheck()" name="optradio" value="option3">Other <span id="studentIdWarning" class="error"></span>
+                                            <input type="text" onfocus="releasedOtherCheck()" oninput="releasedOtherCheck()" class="form-control" id="student_id" placeholder="20XX-XXXX">
+                                          </label>
+                                        </div>
+                                    </div>
+                                    <div id="defectiveTitle" style="color:red;display:none" >No glassware to declare missing or defective</div>
+                                    <div id="defectiveContent">
+                                        <span id="maxItems" hidden></span>
+                                        <span id="releaseConfirmDefective" value="true" hidden></span>
+                                        <h4 style="float:left;padding-right:10%">Item Status</h4>
+                                        <span id="moreItemStatus" style="float:right"></span>
+                                        <table id="defectiveTable" class="table table-borderless">
+                                        <span id="defectiveTableWarning" style="color:red"></span>
+                                        <thead>
+                                          <span id="itemsheader" style="display:none">
+                                            <tr>
+                                                <th width="55%"><center>Item Name</center></th>
+                                                <th width="15"><center>Quantity</center></th>
+                                                <th width="20%"><center>Status</center></th>
+                                                <th width="10%"><center> </center></th>
+                                            </tr>
+                                          </span>
+                                        </thead>
+                                        <tbody>
+                                        <span id="moreItems">
+                                        
+                                        </span>
+                                        </tbody>
+                                        </table>
+                                        <button type="button" class="btn btn-sm btn-primary" id="moreitemsbtn" onclick="defectiveAddItem(value)"> + More Items 
+                                        </button>
+                                        <form>
+                                            <div class="form-group">
+                                                <label for = "defective-comments" class = "col-form-label">Comments:</label>
+                                                <textarea class="form-control" id="defective-comments"></textarea>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div id="declinedContent">
+                                        <span id="releaseConfirmDeclined" value="false" hidden></span>
+                                        <form>
+                                            <div class="form-group">
+                                                <label for = "decline-reason" class = "col-form-label">Comments: <span style="color:red">*</span></label>
+                                                <span style="color:red" id= "declineWarning"></span>
+                                                <textarea class="form-control" id="updateDeclineComments"></textarea>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" onclick="submitUpdate(this)" id="submitUpdate">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--modals-->
+           <!--edit Group Modal-->
+                <div id="edit-group-modal" class="modal " role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">Edit Group</h4>
+                        <span id="old-item-id" hidden></span> 
+                      </div>
+                      <div class="modal-body">
+                        <label class="text-danger" id="edit-error-msg"></label>
+                        <br>
+                        Semester: <div id="semDD-edit"></div>
+                        Class: <div id="classDD-edit"></div>
+                        
+                        Item: 
+                            <div id="itemDD-edit"></div>
+                        Students:<p class="multiSel-edit"></p>  
+                        <div class="studentDiv">
+                            <dl class="dropdown" id="dropdownSearchDiv"> 
+                                <dt>
+                                <a href="#">
+                                    <input type="text" name="searchStudent" id="searchStudent" class="form-control searchStudent" placeholder="Click to view or hide students list."> 
+                                  
+                                 
+                                </a>
+                                </dt>
+                              
+                                <dd>
+                                    <div class="studentslist-edit" id="studentslist-edit">
+                                    </div>
+                                </dd>
+
+                            </dl>
+                        <!-- <input type="text" name="edit-itemID" id="edit-itemID"></input>
+                        -->
+                      
+                      </div>
+                      <div class="modal-footer">
+                        <button class="btn btn-primary"  data-dismiss="modal" id="edit-summary-confirm-btn" onclick="groupSummary()"> Confirm </button>
+                        <button class="btn edit-summary-cancel-btn" data-dismiss="modal" id="edit-summary-cancel-btn" onclick="cancelAdd()">Cancel</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+    <!--Confirmation Modal-->
+                <div class="modal" id="confirmModal_archive" role="dialog">
+                    <div class="modal-dialog">
+                    
+                        <!-- Decline Model Content -->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Confirmation</h4>
+                                
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label id="archive-confirm-text" class = "col-form-label"></label>
+                                        <br>
+                                        <span id="additional-archive-text"></label>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" id="archive-btn" data-dismiss="modal" onclick="confirmArchive()">Confirm</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal" id="cancelConfirm">Cancel</button>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div>
+                <span id="selectedSem"></span>
+                <span id="selectedClass"></span>
+
+                        <!--Add Class Modal-->      
+                <div id="addClass-modal" class="modal " role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">Create New Class</h4>
+                        
+                        
+                      </div>
+                      <div class="modal-body">
+                        <form id="classNameNew">
+                            <span id="error-class" class="error"></span>
+                            <input type="text" name="newClassName" class="form-control" placeholder="Enter class name." id="newClassName"></input>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button class="btn btn-primary"  id="addClass-confirm-btn" onclick="addClassConfirm()"> Confirm </button>
+                        <button class="btn addClass-cancel-btn" data-dismiss="modal" id="addClass-cancel-btn">Cancel</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div id="addClassConfirm-modal" class="modal " role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">Confirmation of New Class</h4>
+                        
+                        
+                      </div>
+                      <div class="modal-body">
+                        Create new class for <span id="confirmClassName"></span>
+                      </div>
+                      <div class="modal-footer">
+                        <button class="btn btn-primary"  id="addClass-confirm-btn" onclick="saveClass()"> Confirm </button>
+                        <button class="btn addClass-cancel-btn" data-dismiss="modal" id="addClass-cancel-btn">Cancel</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+
+                <div id="delete-modal" class="modal " role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title" id="remove-title"></h4>                        
+                      </div>
+                      <div class="modal-body">
+                        <form>
+                             <div class="form-group">
+                                <label id="delete-confirm-text" class = "col-form-label"></label>
+                                <br>
+                                <span id="additional-delete-text"></label>
+                            </div>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button class="btn btn-primary"  id="delete-confirm-btn" onclick="deleteGroupConfirm(this)"> Confirm </button>
+                        <button class="btn addClass-cancel-btn" data-dismiss="modal" id="delete-cancel-btn">Cancel</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+
+
+                <div id="viewClass-modal" class="modal " role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">View Classes</h4>
+                        
+                        
+                      </div>
+                      <div class="modal-body">
+                      <div class="table-responsive table-half-width">
+                            <div id="showingClasses"></div>
+                        
+                       </div>
+                        
+                      </div>
+                      <div class="modal-footer">
+                        <button class="btn" data-dismiss="modal" id="viewClasses-cancel-btn">Cancel</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <!-- view semester-->
+                <div id="viewSem-modal" class="modal " role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">View Semesters</h4>
+                        
+                        
+                      </div>
+                      <div class="modal-body">
+                      <div class="table-responsive table-half-width">
+                            <div id="showingSem"></div>
+                        
+                       </div>
+                        
+                      </div>
+                      <div class="modal-footer">
+                        <button class="btn" data-dismiss="modal" id="viewSem-cancel-btn">Cancel</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <!--confirmation modal for all-->
+                <div id="addSemesterConfirmModal" class="modal " role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">Confirmation for New Semester</h4>
+                      </div>
+                      <div class="modal-body">Add new semester <span id="newSemesterCode"></span>?
+                      <div class="modal-footer">
+                        <button class="btn btn-primary" onclick="addSemesterConfirm()"> Confirm </button>
+                        <button class="btn btn-default" id="confirmationCancelButton" data-dismiss="modal" >Cancel</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                </div>
+
+                        <!--Add Semester Modal-->       
+                <div id="addSemester-modal" class="modal " role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Create New Semester</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="semCodeNew">
+                                <span id="error-sem" class="error"></span>
+                                <input type="text" name="newSemesterName" placeholder="Enter semester code." class="form-control" id="newSemesterName">
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" id="addSemester-confirm-btn" onclick="addSemesterConfirm()"> Confirm </button>
+                            <button class="btn addSemester-cancel-btn" data-dismiss="modal" onclick="formReset('semCodeNew')">Cancel</button>
+                        </div>
+                    </div>
+
+                  </div>
+                </div>
+                
+
+                <!-- add new group modal-->
+                <div class="modal fade" id="add-group-modal" tabindex="-1" role="dialog">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">New Group</h4>
+                      </div>
+                      <div class="modal-body">
+                        Semester: <div id="semDD"></div>
+                        Class: <div id="classDD"></div>
+                        Item:<div id="itemDD"></div>
+                        Students:<p class="multiSel"></p>  
+                            <div class="studentDiv">
+                            <dl class="dropdown" id="dropdownSearchDiv"> 
+                                <dt>
+                                <a href="#">
+                                    <input type="text" name="searchStudent" id="searchStudent" class="form-control searchStudent" placeholder="Click to view or hide students list."> 
+                                </a>
+                                </dt>
+                                <dd>
+                                    <div class="studentslist" id="studentslist">
+                                    </div>
+                                </dd>
+
+                            </dl>                      
+                            </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button class="btn btn-primary"  data-dismiss="modal" id="summary-confirm-btn" onclick="groupSummary()"> Confirm </button>
+                        <button class="btn summary-cancel-btn" data-dismiss="modal" id="summary-cancel-btn" onclick="cancelAdd()">Cancel</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+
+
+                <!--Summary Group Modal-->
+                <div id="summary-group-modal" class="modal " role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">New Group Summary</h4>
+                        
+                        
+                      </div>
+                      <div class="modal-body">
+                        Semester: <span id="sum-semester"></span><br> 
+                        Class: <span id="sum-class"></span><br>
+                        Item: <span id="sum-item"></span><br>
+                        Students: &nbsp;<span id="sum-students"></span> 
+                    </div>
+                      <div class="modal-footer">
+                        <button class="btn btn-primary"  data-dismiss="modal" id="summary-save-btn" onclick="saveGroup()"> Confirm </button>
+                        <button class="btn summary-cancel-btn" data-dismiss="modal" id="summary-cancel-btn" onclick="cancelSave()">Cancel</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!--Summary Edit Group Modal-->
+                <div id="summary-edit-group-modal" class="modal " role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Group Summary</h4>
+                        </div>
+                        <div class="modal-body">
+                            Semester: <span id="sum-semester-edit"></span><br>
+                            Class: <span id="sum-class-edit"></span><br>
+                            Item: <span id="sum-item-edit"></span><br>
+                            Students: &nbsp;<span id="sum-students-edit"></span> 
+                        </div>
+                      <div class="modal-footer">
+                        <button class="btn btn-primary"  data-dismiss="modal" id="summary-save-btn" onclick="saveGroup()"> Confirm </button>
+                        <button class="btn summary-cancel-btn" data-dismiss="modal" id="summary-cancel-btn" onclick="cancelSave()">Cancel</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+</body>
+
+    <!--   Core JS Files   -->
+    <script src="assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
+	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+
+	<!--  Charts Plugin -->
+	<script src="assets/js/chartist.min.js"></script>
+
+    <!--  Notifications Plugin    -->
+    <script src="assets/js/bootstrap-notify.js"></script>
+
+    <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+	<script src="assets/js/light-bootstrap-dashboard.js?v=1.4.0"></script>
+
+	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
+	<script src="assets/js/demo.js"></script>
+
+    <script src="login.js"></script>
+    <script src="request.js"></script>
+    <script src="history.js"></script>
+    <script src="inventory.js"></script>
+    <script src="accountability.js"></script>
+    <script src="equipment.js"></script>
+
+	
+
+</html>

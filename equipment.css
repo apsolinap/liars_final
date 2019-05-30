@@ -1,0 +1,71 @@
+/*html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+.slider {
+		width: 20%;
+		height:100%;
+		float: left;
+		padding: 15px;
+	background-color: #47c9af;
+	}
+	.content_div{
+		float: right;
+		width: 80%;
+
+	}
+	.content{
+		width: 80%;
+		float: right;
+
+	}
+
+
+.chooseClass, .chooseSem, .chooseStatus, .chooseitems{
+	padding:10px;
+	background-color: #47c9af;
+    	border: solid 1px whitesmoke;
+   		 margin-top: 5px;
+    	font-size: 18px;
+    	color:white;
+}
+
+.chooseClass:hover, .chooseSem:hover, .chooseStatus:hover{
+	background-color: white;
+	color:#47c9af;
+}
+
+option{
+
+}
+button {
+  background-color:#47c9af ;
+  width: 100%;
+  border: solid 1px white;
+  padding: 5px 0;
+  margin-bottom: 5px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}
+
+button:hover{
+	background-color: white;
+	color:#47c9af;
+}
+.equi-buttons{
+	margin-top: 50px;
+}
+
+button.close{
+	float:right;
+	width: 50px;
+}
+#newClassName{
+	padding:5px;
+	width: 100%;
+}
+
+#confirmClassName{
+	font-weight: bold;
+}*/
